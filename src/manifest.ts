@@ -5,6 +5,9 @@ const manifest: chrome.runtime.ManifestV3 = {
   action: {
     default_popup: "./html/popup/index.html",
   },
+  background: {
+    service_worker: "./background.js",
+  },
 };
 
 export default manifest;

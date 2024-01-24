@@ -8,6 +8,7 @@ export default defineConfig({
     entriesDir: "src/pages",
   },
   output: {
+    polyfill: "off",
     copy: [
       {
         from: "./src/manifest.ts",
@@ -22,5 +23,8 @@ export default defineConfig({
       },
     ],
     disableInlineRuntimeChunk: true,
+    disableFilenameHash: true,
+    disableMinimize: true,
+    cleanDistPath: false,
   },
 });
