@@ -1,4 +1,5 @@
 import { appTools, defineConfig } from "@modern-js/app-tools";
+import { bundleRequire } from "bundle-require";
 
 // https://modernjs.dev/en/configure/app/usage
 export default defineConfig({
@@ -9,12 +10,13 @@ export default defineConfig({
   output: {
     copy: [
       {
-        from: "./src/manifest.json",
-        to: "",
+        from: "./src/manifest.ts",
+        to: "./manifest.json",
         //@ts-ignore
-        transform(content) {
-          const manifest = JSON.parse(content.toString("utf8"));
-          delete manifest["$schema"];
+        async transform(content, filepath) {
+          const {
+            mod: { default: manifest },
+          } = await bundleRequire({ filepath });
           return JSON.stringify(manifest);
         },
       },
