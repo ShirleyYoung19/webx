@@ -18,7 +18,7 @@ export default defineConfig({
           const {
             mod: { default: manifest },
           } = await bundleRequire({ filepath });
-          return JSON.stringify(manifest);
+          return JSON.stringify(manifest, null, 2);
         },
       },
     ],

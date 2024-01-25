@@ -8,6 +8,13 @@ const manifest: chrome.runtime.ManifestV3 = {
   background: {
     service_worker: "./background.js",
   },
+  content_scripts: [
+    {
+      matches: ["https://*/*"],
+      js: ["./content_script.js"],
+      run_at: "document_idle",
+    },
+  ],
 };
 
 export default manifest;
