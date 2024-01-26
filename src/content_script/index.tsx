@@ -1,14 +1,32 @@
 import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
+
+import "./index.css";
+
 interface AppProps {
   className?: string;
 }
 
 const App: React.FC<AppProps> = ({ className }) => {
-  return <div style={{ width: "200px" }}>我是你第一个插件的注入</div>;
+  return (
+    <div className={"title"} style={{ width: "200px" }}>
+      我是你第一个插件的注入
+    </div>
+  );
 };
 
 const root = document.createElement("div");
-document.body.append(root);
+const shadowRoot = root.attachShadow({ mode: "open" });
 
-createRoot(root).render(<App />);
+const cssUrl = chrome.runtime.getURL("content_script.css");
+
+fetch(cssUrl)
+  .then((response) => response.text())
+  .then((cssContent) => {
+    const styleSheet = new CSSStyleSheet();
+    styleSheet.replaceSync(cssContent);
+    shadowRoot.adoptedStyleSheets = [styleSheet];
+  });
+
+document.body.append(root);
+createRoot(shadowRoot).render(<App />);

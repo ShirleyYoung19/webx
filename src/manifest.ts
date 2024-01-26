@@ -12,7 +12,14 @@ const manifest: chrome.runtime.ManifestV3 = {
     {
       matches: ["https://*/*"],
       js: ["./content_script.js"],
+      css: ["./content_script.css"],
       run_at: "document_idle",
+    },
+  ],
+  web_accessible_resources: [
+    {
+      matches: ["https://*/*"],
+      resources: ["content_script.css"],
     },
   ],
 };
