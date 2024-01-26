@@ -6,20 +6,19 @@ const manifest: chrome.runtime.ManifestV3 = {
     default_popup: "./html/popup/index.html",
   },
   background: {
-    service_worker: "./background.js",
+    service_worker: "./static/js/background.js",
   },
   content_scripts: [
     {
       matches: ["https://*/*"],
-      js: ["./content_script.js"],
-      css: ["./content_script.css"],
+      js: ["./static/js/content_script.js"],
       run_at: "document_idle",
     },
   ],
   web_accessible_resources: [
     {
       matches: ["https://*/*"],
-      resources: ["content_script.css"],
+      resources: ["static/css/content_script.css"],
     },
   ],
 };

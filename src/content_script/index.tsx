@@ -18,7 +18,7 @@ const App: React.FC<AppProps> = ({ className }) => {
 const root = document.createElement("div");
 const shadowRoot = root.attachShadow({ mode: "open" });
 
-const cssUrl = chrome.runtime.getURL("content_script.css");
+const cssUrl = chrome.runtime.getURL("static/css/content_script.css");
 
 fetch(cssUrl)
   .then((response) => response.text())

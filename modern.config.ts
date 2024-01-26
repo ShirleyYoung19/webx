@@ -27,4 +27,15 @@ export default defineConfig({
     disableMinimize: true,
     cleanDistPath: false,
   },
+  tools: {
+    webpackChain: (chain, {}) => {
+      chain.entry("content_script").add("src/content_script/index.tsx");
+      chain.entry("background").add("src/background/index.ts");
+    },
+  },
+  performance: {
+    chunkSplit: {
+      strategy: "all-in-one",
+    },
+  },
 });
