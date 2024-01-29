@@ -6,9 +6,16 @@ export default defineConfig({
   plugins: [appTools()],
   source: {
     entriesDir: "src/pages",
+    define: {
+      __DEV__: JSON.stringify(process.env.NODE_ENV === "development"),
+    },
+  },
+  dev: {
+    assetPrefix: true,
   },
   output: {
     polyfill: "off",
+    overrideBrowserslist: ["last 2 Chrome versions"],
     copy: [
       {
         from: "./src/manifest.ts",
@@ -39,6 +46,12 @@ export default defineConfig({
           );
         },
       });
+    },
+    devServer: {
+      client: {
+        host: "localhost",
+        protocol: "ws",
+      },
     },
   },
 });

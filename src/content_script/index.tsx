@@ -1,18 +1,12 @@
-import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
+import App from "./App";
 
 import "./index.css";
 
-interface AppProps {
-  className?: string;
-}
-
-const App: React.FC<AppProps> = ({ className }) => {
-  return (
-    <div className={"title"} style={{ width: "200px" }}>
-      我是你第一个插件的注入
-    </div>
-  );
+// @ts-ignore
+__webpack_require__.l = async (url: string, done: Function) => {
+  await import(/*webpackIgnore: true*/ url);
+  done();
 };
 
 const root = document.createElement("div");
